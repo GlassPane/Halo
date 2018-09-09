@@ -51,6 +51,21 @@ compileJava {
     sourceCompatibility = targetCompatibility = project.jvm_version
 }
 
+def addProjectSourceSetIDE(final String sourceSet) {
+    File javaSource = file("src/" + sourceSet + "/java")
+    if(javaSource.exists()) idea.module.sourceDirs += javaSource
+
+    File resources = file("src/" + sourceSet + "/resources")
+    if(resources.exists()) idea.module.resourceDirs += resources
+}
+
+sourceSets {
+    debug.compileClasspath += main.compileClasspath + main.output
+    main.runtimeClasspath += debug.output
+    addProjectSourceSetIDE(api.getName())
+    addProjectSourceSetIDE(debug.getName())
+}
+
 repositories {
 
     maven {
