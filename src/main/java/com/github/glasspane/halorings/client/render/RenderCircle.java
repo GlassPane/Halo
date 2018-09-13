@@ -8,9 +8,9 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
+import org.lwjgl.util.vector.Vector3f;
 
 import javax.annotation.Nullable;
-import javax.vecmath.Vector3d;
 import java.awt.*;
 
 public class RenderCircle extends Render<EntityMagicCircle> {
@@ -33,8 +33,8 @@ public class RenderCircle extends Render<EntityMagicCircle> {
         new ShapeRenderer()
                 .color(colors)
                 .texture(getEntityTexture(entity))
-                .circle(x, y, z, new Vector3d(0, 1, 0), rotation, scale)
-                .circle(x, y + 1, z, new Vector3d(0, 1, 0), 360.F - rotation, scale * 2.0F)
+                .circle(x, y, z, new Vector3f(0, 1, 0), rotation, scale)
+                .circle(x, y + 1, z, new Vector3f(0, 1, 0), 360.F - rotation, scale * 2.0F)
                 .draw();
     }
 
