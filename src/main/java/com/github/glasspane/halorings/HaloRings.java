@@ -1,15 +1,13 @@
 package com.github.glasspane.halorings;
 
+import com.github.glasspane.halorings.init.*;
 import com.github.upcraftlp.glasspane.api.proxy.IProxy;
 import com.github.upcraftlp.glasspane.util.ModUpdateHandler;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.*;
 
 import static com.github.glasspane.halorings.HaloRings.*;
 
@@ -46,7 +44,7 @@ public class HaloRings {
     public static final CreativeTabs CREATIVE_TAB = new CreativeTabs(MODID + ".name") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(Items.APPLE); //TODO change once we have items!
+            return new ItemStack(HaloItems.SPELL_PARCHMENT); //TODO change once we have items!
         }
     };
 
@@ -57,5 +55,6 @@ public class HaloRings {
     public void preInit(FMLPreInitializationEvent event) {
         ModUpdateHandler.registerMod(MODID);
         proxy.preInit(event);
+        ScrollEffects.init();
     }
 }

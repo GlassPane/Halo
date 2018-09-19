@@ -21,7 +21,6 @@ plugins {
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'com.matthewprenger.cursegradle'
 
 apply from: 'https://gist.githubusercontent.com/UpcraftLP/0a98a7dfe913bd3e99073efa7ad0353b/raw/mod_script.gradle'
 //Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
@@ -51,21 +50,6 @@ compileJava {
     sourceCompatibility = targetCompatibility = project.jvm_version
 }
 
-def addProjectSourceSetIDE(final String sourceSet) {
-    File javaSource = file("src/" + sourceSet + "/java")
-    if(javaSource.exists()) idea.module.sourceDirs += javaSource
-
-    File resources = file("src/" + sourceSet + "/resources")
-    if(resources.exists()) idea.module.resourceDirs += resources
-}
-
-sourceSets {
-    debug.compileClasspath += main.compileClasspath + main.output
-    main.runtimeClasspath += debug.output
-    addProjectSourceSetIDE(api.getName())
-    addProjectSourceSetIDE(debug.getName())
-}
-
 repositories {
 
     maven {
@@ -91,7 +75,7 @@ repositories {
     maven {
         //fallback for almost everything, this is CurseForge :P
         name = "CurseForge"
-        url = "https://minecraft.curseforge.com/api/maven"
+        url = "https://minecraft.curseforge.com/com.github.upcraftlp.glasspane.api.api/maven"
     }
 
     maven {
@@ -158,20 +142,20 @@ task apiJar(type: Jar) {
     onlyIf{
         project.hasProperty("api_package")
     }
-    from sourceSets.api.allJava
-    include new String(findProperty("api_package") + "/**").replace(".", "/")
+    from sourceSets.main.allJava
+    include findProperty("api_package").toString().replace(".", "/") + "/**"
     from ("LICENSE") {
         include "*"
     }
     manifest.mainAttributes(
             "Built-On-Java": "${System.getProperty('java.vm.version')} + (${System.getProperty('java.vm.vendor')})",
-            "Implementation-Title": project.name + '-api',
+            "Implementation-Title": project.name + '-com.github.upcraftlp.glasspane.api.api',
             "Implementation-Version": project.version,
-            "Maven-Artifact":"${project.group}:${artifactID}:${project.version}:api",
+            "Maven-Artifact":"${project.group}:${artifactID}:${project.version}:com.github.upcraftlp.glasspane.api.api",
             "Timestamp": buildTimeStamp,
             "Built-On": "${mc_version}-${forge_version}"
     )
-    classifier = 'api'
+    classifier = 'com.github.upcraftlp.glasspane.api.api'
 }
 
 // Javadoc jar

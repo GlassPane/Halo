@@ -16,7 +16,7 @@ public class DebugHandler {
 
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if(event.getSide() == Side.SERVER && event.getFace() == EnumFacing.UP) {
+        if(event.getSide() == Side.SERVER && event.getFace() == EnumFacing.UP && event.getHitVec() != null) {
             Item item = event.getEntityPlayer().getHeldItem(event.getHand()).getItem();
             if(item == Items.STICK) {
                 EntityMagicCircleAgeable circle = new EntityMagicCircleAgeable(event.getWorld(), 0xFFFF0000, 600);

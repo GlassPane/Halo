@@ -1,0 +1,14 @@
+#PARSE_ESCAPES
+
+#Blocks
+
+#Items
+item.halo_rings.spell_parchment.name=Spell Parchment
+
+#Misc
+itemGroup.halo_rings.name=Halo Rings
+spell.none.name=Empty
+
+#Scrolls
+spell.halo_rings.cleansing.name=Cleansing
+spell.halo_rings.cleansing.desc=pure as a child
